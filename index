@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lời chúc gửi Mẹ — 20/10</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(180deg, #ffe6ef, #ffccda);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .envelope {
+    width: 240px;
+    height: 150px;
+    position: relative;
+    background: #ffb6c1;
+    border-radius: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  }
+
+  .flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 75%;
+    background: #ffc4d2;
+    clip-path: polygon(0 0, 50% 80%, 100% 0);
+  }
+
+  button {
+    margin-top: 20px;
+    background: #ff6fa2;
+    color: white;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    box-shadow: 0 5px 10px rgba(255, 111, 162, 0.3);
+  }
+  button:hover { background: #ff5b8e; }
+
+  .letter {
+    display: none;
+    background: #fff;
+    max-width: 600px;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    margin-top: 20px;
+    line-height: 1.7;
+    text-align: justify;
+    z-index: 10;
+  }
+
+  .letter h2 {
+    color: #ff6fa2;
+    text-align: center;
+  }
+
+  .petal {
+    position: fixed;
+    top: -10px;
+    color: #ffb7c5;
+    font-size: 20px;
+    animation: fall linear forwards;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(110vh) rotate(360deg);
+      opacity: 0.5;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <div class="envelope" id="envelope">
+    <div class="flap"></div>
+  </div>
+  <button id="openBtn">💌 Mở thư</button>
+
+  <div class="letter" id="letter">
+    <h2>Lời nhắn dành cho Mẹ</h2>
+    <p id="message"></p>
+  </div>
+
+<script>
+const messageText = `Mẹ ơi,
+
+Ngày 20/10 lại đến, con muốn cảm ơn mẹ vì đã sinh ra, nuôi nấng và yêu thương con suốt từng ấy năm trời. Con biết, có những lúc con chưa ngoan, chưa hiểu hết những vất vả của mẹ, nhưng trong lòng con, mẹ luôn là người phụ nữ tuyệt vời nhất. Từ bữa cơm mẹ nấu, những lời nhắc nhở mỗi sáng, đến từng cái áo mẹ gấp sẵn, tất cả đều là tình thương vô bờ mà con chẳng thể đong đếm được.
+Giờ con đã xa nhà đi học, không còn được nghe tiếng mẹ gọi dậy mỗi sáng hay những lời nhắc nhở quen thuộc nữa. Nhiều hôm suy nghĩ, con thấy nhớ bữa cơm nhà. Xa rồi mới thấy những điều bình thường ngày xưa lại là thứ ấm áp nhất trên đời.
+Nhân ngày 20/10, con chúc mẹ luôn bình an, khỏe mạnh, hạnh phúc và lúc nào cũng giữ nụ cười hiền trên môi.
+Con hứa sẽ cố gắng học tập thật tốt, sống thật tử tế để mẹ luôn yên lòng. Con yêu mẹ nhiều lắm! 💐`;
+
+const openBtn = document.getElementById('openBtn');
+const letter = document.getElementById('letter');
+const message = document.getElementById('message');
+
+openBtn.addEventListener('click', () => {
+  document.getElementById('envelope').style.display = 'none';
+  openBtn.style.display = 'none';
+  letter.style.display = 'block';
+  typeWriter(messageText, message);
+  startPetals();
+});
+
+function typeWriter(text, el, speed = 45) {
+  el.innerHTML = '';
+  let i = 0;
+  function typing() {
+    if (i < text.length) {
+      el.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    }
+  }
+  typing();
+}
+
+// 🌸 Hoa anh đào rơi
+function startPetals() {
+  setInterval(() => {
+    const petal = document.createElement('div');
+    petal.classList.add('petal');
+    petal.textContent = '🌸';
+    petal.style.left = Math.random() * 100 + 'vw';
+    petal.style.fontSize = 16 + Math.random() * 14 + 'px';
+    petal.style.animationDuration = 6 + Math.random() * 5 + 's';
+    document.body.appendChild(petal);
+    setTimeout(() => petal.remove(), 11000);
+  }, 400);
+}
+</script>
+</body>
+</html>
